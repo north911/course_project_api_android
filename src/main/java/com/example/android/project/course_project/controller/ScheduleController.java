@@ -20,7 +20,7 @@ public class ScheduleController {
     ScheduleService scheduleService;
 
     @RequestMapping(value = "/getSchedule", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public List<WeekSchedule> getScheduleHtml(@RequestParam(name = "groupName") String groupName) throws UnsupportedEncodingException {
-        return scheduleService.getGroupSchedule(URLEncoder.encode(groupName, "UTF-8"));
+    public List<WeekSchedule> getScheduleHtml(@RequestParam(name = "groupName") String groupName, @RequestParam(name = "subGroup") int subGroup) throws UnsupportedEncodingException {
+        return scheduleService.getGroupSchedule(URLEncoder.encode(groupName, "UTF-8"), subGroup);
     }
 }

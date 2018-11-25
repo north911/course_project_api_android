@@ -15,12 +15,15 @@ import java.util.List;
 @Service
 public class ScheduleService {
 
-    public List<WeekSchedule> getGroupSchedule(String group) {
+    public List<WeekSchedule> getGroupSchedule(String group, int subGroup) {
         String groupUri = UriBuilder.buildGroupSearchUri(group);
-        String uriSchedule = HtmlParser.parseSubGroupScheduleUri(RequestSender.getResponseBodyOfRequest(groupUri));
+        String uriSchedule = HtmlParser.parseSubGroupScheduleUri(RequestSender.getResponseBodyOfRequest(groupUri), subGroup);
         uriSchedule = UriBuilder.buildGroupScheduleUri(uriSchedule);
         Elements elements = HtmlParser.parseGroupSchedule(RequestSender.getResponseBodyOfRequest(uriSchedule));
-        return createSchedule(elements);
+        if (elements.size() > 0) {
+            return createSchedule(elements);
+        } else
+            return null;
     }
 
     private List<WeekSchedule> createSchedule(Elements elements) {
@@ -55,7 +58,7 @@ public class ScheduleService {
             dayScheduleList.get(i).setDayOfWeek(elements.get(startIndex).text());
         }
         int i = startIndex;
-        while ( i + 13 < elements.size() && !elements.get(i + 1).attributes().get("colspan").equals("9")) {
+        while (i + 13 < elements.size() && !elements.get(i + 1).attributes().get("colspan").equals("9")) {
             setPairLineToList(dayScheduleList, i, elements);
             i += 13;
         }

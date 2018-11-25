@@ -5,13 +5,12 @@ import org.jsoup.select.Elements;
 
 public class HtmlParser {
 
-    public static String parseSubGroupScheduleUri(Document doc) {
+    public static String parseSubGroupScheduleUri(Document doc, int subGroup) {
         Elements links = doc.select("a[href]");
-        return links.get(3).attr("href");
+        return links.get(2 + subGroup).attr("href");
     }
 
     public static Elements parseGroupSchedule(Document doc){
-        Elements ps = doc.select("td");
-        return ps;
+        return doc.select("td");
     }
 }
