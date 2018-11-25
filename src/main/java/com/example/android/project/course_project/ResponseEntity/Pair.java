@@ -4,6 +4,15 @@ public class Pair {
     private String name;
     private String professor;
     private String time;
+    private String cabinet;
+
+    public String getCabinet() {
+        return cabinet;
+    }
+
+    public void setCabinet(String cabinet) {
+        this.cabinet = cabinet;
+    }
 
     public String getName() {
         return name;

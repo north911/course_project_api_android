@@ -1,10 +1,15 @@
 package com.example.android.project.course_project.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaySchedule {
     private String dayOfWeek;
     private List<Pair> pairList;
+
+    public DaySchedule(){
+        pairList = new ArrayList<>();
+    }
 
     public String getDayOfWeek() {
         return dayOfWeek;
